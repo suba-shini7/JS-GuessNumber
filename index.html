@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Number Guessing Game 🎲</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/287/287221.png" type="image/png">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .game-container {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 300px;
+      width: 100%;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    p {
+      margin: 20px 0 10px;
+      font-size: 16px;
+    }
+
+    input[type="number"] {
+      padding: 8px;
+      font-size: 16px;
+      width: 60px;
+      margin-right: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      text-align: center;
+    }
+
+    button {
+      padding: 8px 16px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background-color: #007BFF;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    h3 {
+      margin: 20px 0 0;
+      color: #444;
+      min-height: 24px;
+    }
+
+    .play-again-btn {
+      margin-top: 20px;
+      background-color: #28a745;
+    }
+
+    .play-again-btn:hover {
+      background-color: #1e7e34;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="game-container">
+    <h2>🎲 Number Guessing Game</h2>
+
+    <p>Guess a number between 1 and 10:</p>
+
+    <input type="number" id="userGuess" min="1" max="10">
+    <button onclick="checkGuess()">Check</button>
+
+    <h3 id="resultMessage"></h3>
+
+    <button class="play-again-btn" onclick="resetGame()">Play Again</button>
+  </div>
+
+  <script>
+    let randomNumber = Math.floor(Math.random() * 10) + 1;
+
+    function checkGuess() {
+      let guess = parseInt(document.getElementById("userGuess").value);
+
+      if (!guess || guess < 1 || guess > 10) {
+        document.getElementById("resultMessage").innerText = "⚠️ Enter a number between 1 and 10!";
+        return;
+      }
+
+      if (guess === randomNumber) {
+        document.getElementById("resultMessage").innerText = "🎉 Correct! You guessed it!";
+      } else if (guess > randomNumber) {
+        document.getElementById("resultMessage").innerText = "📈 Too high! Try again.";
+      } else {
+        document.getElementById("resultMessage").innerText = "📉 Too low! Try again.";
+      }
+    }
+
+    function resetGame() {
+      document.getElementById("userGuess").value = "";
+      document.getElementById("resultMessage").innerText = "";
+      randomNumber = Math.floor(Math.random() * 10) + 1;
+    }
+  </script>
+
+</body>
+</html>
